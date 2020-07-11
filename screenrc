@@ -10,16 +10,19 @@ bind k focus up      # Ctl-a k goes up
 bind l focus right   # Ctl-a l goes right
 bind h focus left    # Ctl-a h goes left
 
-# Bind keys for resizing 
-bind L resize -h +10  # Ctl-a L increase horizontally by 10
-bind H resize -h -10  # Ctl-a H decrease horizontally by 10
-bind K resize -v +10  # Ctl-a K increase vertically by 10
-bind J resize -v -10  # Ctl-a J decrease vertically by 10
+# Bind keys for resizing
+bind L resize -h +10 # Ctl-a L increase horizontally by 10
+bind H resize -h -10 # Ctl-a H decrease horizontally by 10
+bind K resize -v +10 # Ctl-a K increase vertically by 10
+bind J resize -v -10 # Ctl-a J decrease vertically by 10
+
+# Backtick tricks
+backtick 1 1 1 <path-to-home>/.myscreen_files/backtick_screen_1
 
 # Setup hardstatus 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string '%{= .g} %H |%=%{K}%{= w}%?%{K}%-Lw%?%{r}(%{W}%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%= %{g}|%{B} %1` %{g}|%{B} %m-%d  %{W}%c %{g} '
+hardstatus string "%{= .g} %H |%=%{= w}%?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%{g}|%{B} %1` %{g}|%{B} %m-%d %{W} %{w}%c %{g} "
 
 # Fix for residual editor text
 altscreen on
@@ -33,5 +36,4 @@ term screen-256color
 # Bind Ctrl+A f or F for activating/deactivating hardstatus line
 bind f eval "hardstatus ignore"
 bind F eval "hardstatus alwayslastline"
-
 # EOF
