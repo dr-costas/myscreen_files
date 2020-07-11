@@ -2,17 +2,15 @@
 
 ## Intro
 
-This is a git repository to hold the settings files for GNU screen. It contains three different branches; 
+This is a branch of the git repository with the settings files for GNU screen, focused
+on the use case of having GNU Screen when connected to a computational cluster, using SLURM.
+The difference from the main branch, is that here there is one extra file:
 
-  1. One that is generic (main)
-  2. One that is specific to macOS (macos)
-  3. And one that is specific to Linux clusters, using SLURM manager (slurm)
+1. File `backtick_screen_1`, that is used for getting the SLURM jobs that are currently
+runing and the toral jobs that are submitted to SLURM, for the user.
 
-The difference of these three branches is that they contain a different `screenrc` file. Additionally,
-the `macos` and `slurm` branches, contain some extra files to be used with the `backtick` command of
-GNU Screen. 
-
-The `README` file at each branch, offers detailed information about the peculiarities of the branch. 
+The amount of runing and total submitted jobs to SLURM, is printed at the right hand
+side of the hardstatus line.
 
 ## Table of contents
 
@@ -73,11 +71,11 @@ The `screenrc` of this branch consists of the following sections:
   7. [Declaration of color handling](#declaration-of-color-handling)
   8. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
-All the above are explained in the following sections. 
+All the above are explained in the following sections.
 
 ### Deactivation of the start-up message
 
-This is performed with the line: 
+This is performed with the line:
 
 ```bash
 startup_message off
@@ -110,7 +108,7 @@ The normal behavior would be to have a message like:
 >
 
 If you want disable this message, then you should use the above mentioned command for screen in
-the `screenrc`. 
+the `screenrc`.
 
 ### Vim-like navigation
 
@@ -128,7 +126,7 @@ To do the navigation, the command/control sequence of GNU Screen has to be press
 ctrl-a j
 ```
 
-to go down. 
+to go down.
 
 This Vim-like navigation, is set by the commands: 
 
@@ -144,7 +142,7 @@ bind h focus left    # Ctl-a h goes left
 When having multiple windows in the same time, in any combination of vertical and horizontal
 splitting, you can resize them using (again) Vim-like key combinations. The difference with
 the navigation is that at the resizing, the `j`, `k`, `l`, and `h`, have to be capital case.
-That is, 
+That is,
 
 ```bash
 ctrl-a J
@@ -216,7 +214,7 @@ If you want to use the 256 color terminal emulation of GNU Screen, then you have
 **Note bold** that in order to use the 256 colors, you have to have a GNU Screen that is built with
 256 colors capabilities. If you do not know how to do this, you can check
 [this blog post](https://kdrossos.net/blog/14/) (is for macOS, but it stands true for Linux as
-well). 
+well).
 
 The line that declares the 256 color support is
 
@@ -234,7 +232,7 @@ bind f eval "hardstatus ignore"
 bind F eval "hardstatus alwayslastline"
 ```
 
-and they indicate that when you use 
+and they indicate that when you use
 
 ```bash
 ctrl-a f
