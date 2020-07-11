@@ -16,6 +16,9 @@ bind H resize -h -10  # Ctl-a H decrease horizontally by 10
 bind K resize -v +10  # Ctl-a K increase vertically by 10
 bind J resize -v -10  # Ctl-a J decrease vertically by 10
 
+# Backtick
+backtick 1 0 7 /Users/<your_user_name>/.myscreen_files/get_music_song
+
 # Setup hardstatus 
 hardstatus off
 hardstatus alwayslastline
