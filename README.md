@@ -1,4 +1,4 @@
-# GNU Screen settings
+# GNU Screen settings - macOS case
 
 ## Intro
 
