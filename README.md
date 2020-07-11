@@ -184,4 +184,5 @@ windowlist string "%4n %h%=%f"
 
 ### Declaration of color handling
 
-
+If you want to use the 256 color terminal emulation of GNU Screen, then you have to declare it.
+*Note bold* **
