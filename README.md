@@ -2,17 +2,16 @@
 
 ## Intro
 
-This is a git repository to hold the settings files for GNU screen. It contains three different branches; 
+This is a branch of the git repository with the settings files for GNU screen, focused on
+the macOS. The difference from the main branch, is that here there are two extra files: 
 
-  1. One that is generic (main)
-  2. One that is specific to macOS (macos)
-  3. And one that is specific to Linux clusters, using SLURM manager (slurm)
+1. File `currently_playing.scpt` that is used to get the currently playing info from
+Music app
+2. File `get_music_song`, that calls the `currently_playing.scpt` file, and processes
+the output
 
-The difference of these three branches is that they contain a different `screenrc` file. Additionally,
-the `macos` and `slurm` branches, contain some extra files to be used with the `backtick` command of
-GNU Screen. 
-
-The `README` file at each branch, offers detailed information about the peculiarities of the branch. 
+The file `get_music_song` is called from an extra `backtick` directive in the `screenrc`
+file, and the result is printed at the hardstatus line. 
 
 ## Table of contents
 
@@ -52,6 +51,15 @@ the `.screenrc` file), by doing
 $ mv ~/myscreen_files ~/.myscreen_files
 ```
 
+Now, you have to edit the `screenrc` file in the `myscreen_files`, and replace the `<your_user_name>`
+at the line
+
+```bash
+backtick 1 0 7 /Users/<your_user_name>/.myscreen_files/get_music_song
+```
+
+with your username. 
+
 Finally, add a symbolik link of the `myscreen_files/screenrc` file where GNU Screen expects to find it,
 by doing
 
@@ -66,10 +74,11 @@ The `screenrc` of this branch consists of the following sections:
   1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
   2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
   3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-  4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
-  5. [Small fixes for appearance](#fixes-of-appearance)
-  6. [Declaration of color handling](#declaration-of-color-handling)
-  7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
+  4. [Backtick command for currently playing music](#backtick-command-for-currently-playing-music)
+  5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+  6. [Small fixes for appearance](#fixes-of-appearance)
+  7. [Declaration of color handling](#declaration-of-color-handling)
+  8. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
 All the above are explained in the following sections. 
 
@@ -159,6 +168,18 @@ bind K resize -v +10  # Increase vertically by 10
 bind J resize -v -10  # Decrease vertically by 10
 ```
 You change the step size (i.e. the `10`) at will. 
+
+### Backtick command for currently playing music
+
+In the `screenrc` file is the backtick command
+
+```bash
+backtick 1 0 7 /Users/<your_user_name>/.myscreen_files/get_music_song
+```
+
+This line declares that the script `~/.myscreen_files/get_music_song` will be executed 
+every `7` seconds. The output of this script, is used at the hardstatus line, at the
+position of the argument ``%1` ``.
 
 ### Setting up of hardstatus
 
