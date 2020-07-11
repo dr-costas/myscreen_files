@@ -21,10 +21,11 @@ file, and the result is printed at the hardstatus line.
     1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
     2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
     3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-    4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
-    5. [Small fixes for appearance](#fixes-of-appearance)
-    6. [Declaration of color handling](#declaration-of-color-handling)
-    7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
+    4. [Backtick command for currently playing music](#backtick-command-for-currently-playing-music)
+    5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+    6. [Small fixes for appearance](#fixes-of-appearance)
+    7. [Declaration of color handling](#declaration-of-color-handling)
+    8. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
 
 ## How to use the files
