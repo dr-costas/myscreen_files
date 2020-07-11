@@ -41,7 +41,7 @@ To use the files in this branch of the repository, clone the current branch to y
 doing
 
 ```bash
-$ git clone git@github.com:dr-costas/myscreen_files.git
+$ git --single-branch --branch slurm clone git@github.com:dr-costas/myscreen_files.git
 ```
 
 Then, change the name of the created directory, so you will not see it (as it happens by default with
