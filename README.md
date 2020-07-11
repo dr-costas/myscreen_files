@@ -18,6 +18,14 @@ The `README` file at each branch, offers detailed information about the peculiar
 
   1. [How to use the files](#how-to-use-the-files)
   2. [Explanation of `screen` file](#explanation-of-screenrc-file)
+    1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
+    2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
+    3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
+    4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+    5. [Small fixes for appearance](#fixes-of-appearance)
+    6. [Declaration of color handling](#declaration-of-color-handling)
+    7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
+
 
 ## How to use the files
 
