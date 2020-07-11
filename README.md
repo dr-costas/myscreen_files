@@ -18,6 +18,7 @@ The `README` file at each branch, offers detailed information about the peculiar
 
   1. [How to use the files](#how-to-use-the-files)
   2. [Explanation of `screen` file](#explanation-of-screenrc-file)
+
     1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
     2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
     3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
