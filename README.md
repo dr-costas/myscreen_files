@@ -22,10 +22,11 @@ The `README` file at each branch, offers detailed information about the peculiar
     1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
     2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
     3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-    4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
-    5. [Small fixes for appearance](#fixes-of-appearance)
-    6. [Declaration of color handling](#declaration-of-color-handling)
-    7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
+    4. [Backtick command for checking jobs at SLURM](backtick-command-for-checking-jobs-at-slurm)
+    5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+    6. [Small fixes for appearance](#fixes-of-appearance)
+    7. [Declaration of color handling](#declaration-of-color-handling)
+    8. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
 
 ## How to use the files
@@ -66,10 +67,11 @@ The `screenrc` of this branch consists of the following sections:
   1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
   2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
   3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-  4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
-  5. [Small fixes for appearance](#fixes-of-appearance)
-  6. [Declaration of color handling](#declaration-of-color-handling)
-  7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
+  4. [Backtick command for checking jobs at SLURM](#backtick-command-for-checking-jobs-at-slurm)
+  5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+  6. [Small fixes for appearance](#fixes-of-appearance)
+  7. [Declaration of color handling](#declaration-of-color-handling)
+  8. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
 All the above are explained in the following sections. 
 
@@ -148,7 +150,7 @@ That is,
 ctrl-a J
 ```
 
-resizes the window and does not navigate you (notice the `J`). 
+resizes the window and does not navigate you (notice the `J`).
 
 The full list of resizing combinations is
 
@@ -158,7 +160,23 @@ bind H resize -h -10  # Decrease horizontally by 10
 bind K resize -v +10  # Increase vertically by 10
 bind J resize -v -10  # Decrease vertically by 10
 ```
-You change the step size (i.e. the `10`) at will. 
+You change the step size (i.e. the `10`) at will.
+
+### Backtick command for checking jobs at slurm
+
+One of the typical cases of using GNU Screen, is to connect to a server. When this server
+is a computational cluster, then most probably the server will use SLURM system, to manage
+allocation of resources.
+
+In this branch, there is a backtick command to use with GNU Screen, which offers a monitoring
+of the status of user's jobs at the cluster. The format is `running jobs/total submitted jobs`
+and is at the line
+
+```bash
+backtick 1 1 1 <path-to-home>/.myscreen_files/backtick_screen_1
+```
+
+To use it, change the `<path-to-home>` with the path to your `$HOME` directory.
 
 ### Setting up of hardstatus
 
@@ -173,13 +191,13 @@ hardstatus string '%{= .g} %H |%=%{K}%{= w}%?%{K}%-Lw%?%{r}(%{W}%{w}%n%{w}*%f%t%
 In a nutshell, the first line deactivates the default hardstatus, the second makes the hardstatus
 to be always at last line, and the third defines the form. There are multiple capabilities to use
 for the form of hardstatus, and this is beyond of the scope of this README. Please refer to the
-multiple resources online, for adapting the hardstatus form to your tasting. 
+multiple resources online, for adapting the hardstatus form to your tasting.
 
 ### Fixes of appearance
 
 The `screenrc` file of this repository, has some minor fixes for the appearance of GNU Screen. To
 be honest, I haven't explicitly tried how these affect the appearance, but I keep using them. Feel
-free to experiment and keep them or remove them. 
+free to experiment and keep them or remove them.
 
 These fixes are at the lines
 
