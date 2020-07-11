@@ -57,8 +57,8 @@ The `screenrc` of this branch consists of the following sections:
   1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
   2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
   3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-  4. [Setting-up of hardstatus](#settings-up-of-hardstatus)
-  5. [Small fixes for appearance](#fixes-of-apperance)
+  4. [Setting-up of hardstatus](#setting-up-of-hardstatus)
+  5. [Small fixes for appearance](#fixes-of-appearance)
   6. [Declaration of color handling](#declaration-of-color-handling)
   7. [Activation/deactivation of hardstatus line](#activation-and-deactivation-of-hardstatus-line)
 
@@ -129,3 +129,59 @@ bind h focus left    # Ctl-a h goes left
 ```
 
 ### Vim-like resizing of windows
+
+When having multiple windows in the same time, in any combination of vertical and horizontal
+splitting, you can resize them using (again) Vim-like key combinations. The difference with
+the navigation is that at the resizing, the `j`, `k`, `l`, and `h`, have to be capital case.
+That is, 
+
+```bash
+ctrl-a J
+```
+
+resizes the window and does not navigate you (notice the `J`). 
+
+The full list of resizing combinations is
+
+```bash
+bind L resize -h +10  # Increase horizontally by 10
+bind H resize -h -10  # Decrease horizontally by 10
+bind K resize -v +10  # Increase vertically by 10
+bind J resize -v -10  # Decrease vertically by 10
+```
+You change the step size (i.e. the `10`) at will. 
+
+### Setting up of hardstatus
+
+The setting up of the hardstatus is done by the lines
+
+```bash
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= .g} %H |%=%{K}%{= w}%?%{K}%-Lw%?%{r}(%{W}%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%= %{g}|%{B} %1` %{g}|%{B} %m-%d  %{W}%c %{g} '
+```
+
+In a nutshell, the first line deactivates the default hardstatus, the second makes the hardstatus
+to be always at last line, and the third defines the form. There are multiple capabilities to use
+for the form of hardstatus, and this is beyond of the scope of this README. Please refer to the
+multiple resources online, for adapting the hardstatus form to your tasting. 
+
+### Fixes of appearance
+
+The `screenrc` file of this repository, has some minor fixes for the appearance of GNU Screen. To
+be honest, I haven't explicitly tried how these affect the appearance, but I keep using them. Feel
+free to experiment and keep them or remove them. 
+
+These fixes are at the lines
+
+```bash
+# Fix for residual editor text
+altscreen on
+
+# Fix for Name column in windowlist only show "bash"
+windowlist string "%4n %h%=%f"
+```
+
+### Declaration of color handling
+
+
