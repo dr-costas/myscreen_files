@@ -185,4 +185,40 @@ windowlist string "%4n %h%=%f"
 ### Declaration of color handling
 
 If you want to use the 256 color terminal emulation of GNU Screen, then you have to declare it.
-*Note bold* **
+
+**Note bold** that in order to use the 256 colors, you have to have a GNU Screen that is built with
+256 colors capabilities. If you do not know how to do this, you can check
+[this blog post](https://kdrossos.net/blog/14/) (is for macOS, but it stands true for Linux as
+well). 
+
+The line that declares the 256 color support is
+
+```bash
+term screen-256color
+```
+
+### Activation and deactivation of hardstatus line
+
+Finally, at the last lines of the `screenrc` file, there is a key mapping to activate and
+deactivate the appearance of the hardstatus line. These lines are
+
+```bash
+bind f eval "hardstatus ignore"
+bind F eval "hardstatus alwayslastline"
+```
+
+and they indicate that when you use 
+
+```bash
+ctrl-a f
+```
+
+you make the hardstatus line to disappear, and when you use
+
+```bash
+ctrl-a F
+```
+
+you make the hardstatus line to appear (notice the capital `F`).
+
+Enjoy!
