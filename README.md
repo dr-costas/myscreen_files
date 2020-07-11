@@ -60,7 +60,7 @@ $ ls -s ~/.myscreen_files/screenrc ~/.screenrc
 
 ## Explanation of screenrc file
 
-The `screenrc` of this branch consists of the following sections: 
+The `screenrc` of this branch consists of the following sections:
 
   1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
   2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
@@ -81,7 +81,7 @@ This is performed with the line:
 startup_message off
 ```
 
-The normal behavior would be to have a message like: 
+The normal behavior would be to have a message like:
 
 >GNU Screen version 4.08.00 (GNU) 05-Feb-20
 >
@@ -128,7 +128,7 @@ ctrl-a j
 
 to go down.
 
-This Vim-like navigation, is set by the commands: 
+This Vim-like navigation, is set by the commands:
 
 ```bash
 bind j focus down    # Ctl-a j goes down
