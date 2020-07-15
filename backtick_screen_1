@@ -31,6 +31,5 @@ gpu=$(echo "$gpu_util" | sed -n 11p | tr -s ' ' | cut -d ' ' -f 4)
 gpu_mem=$(echo "$gpu_util" | sed -n 12p | tr -s ' ' | cut -d ' ' -f 4)
 
 # Echo the resulting string
-# echo "Mem. use/tot: "$mem_avail"/"$mem_tot" | GPU util/mem: "$gpu"%/"$gpu_mem"%"
 echo "CPU util/mem: "$cpu_util"%/"$mem_util"% | GPU util/mem: "$gpu"%/"$gpu_mem"%"
 # EOF
