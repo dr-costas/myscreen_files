@@ -2,14 +2,15 @@
 
 ## Intro
 
-This is a git repository to hold the settings files for GNU screen. It contains three different branches; 
+This is a git repository to hold the settings files for GNU screen. It contains four different branches; 
 
-  1. One that is generic (main)
-  2. One that is specific to macOS (macos)
-  3. And one that is specific to Linux clusters, using SLURM manager (slurm)
+  1. One that is generic (`main`)
+  2. One that is specific to macOS (`macos`)
+  3. One that is specific to Linux-based computers, where the user has access like a personal computer (`linix-local`)
+  4. And one that is specific to Linux clusters, using SLURM manager (`slurm`)
 
-The difference of these three branches is that they contain a different `screenrc` file. Additionally,
-the `macos` and `slurm` branches, contain some extra files to be used with the `backtick` command of
+The difference of four three branches is that they contain a different `screenrc` file. Additionally,
+the `macos`, `linux-local`, and `slurm` branches, contain some extra files to be used with the `backtick` command of
 GNU Screen. 
 
 The `README` file at each branch, offers detailed information about the peculiarities of the branch. 
