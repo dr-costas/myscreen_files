@@ -18,7 +18,7 @@ mem_tot=${mem_tot:0:$((${#mem_tot}-1))}
 mem_avail=${mem_avail:0:$((${#mem_avail}-1))}
 
 # Get mem util percentage
-mem_util=$(echo "100 - ((100/$mem_tot) * $mem_avail)" | bc )
+cpu_mem=$(echo "100 - ((100/$mem_tot) * $mem_avail)" | bc )
 
 # Get CPU utilization
 cpu_util=$(mpstat | sed -n 4p | tr -s ' ' | cut -d ' ' -f 13)
@@ -26,10 +26,16 @@ cpu_util=$(echo $cpu_util | awk '{print ($0-int($0)<0.499)?int($0):int($0)+1}')
 cpu_util=$(echo "100 - $cpu_util" | bc )
 
 # Get GPU utilization
-gpu_util=$(nvidia-smi -q -d UTILIZATION)
-gpu=$(echo "$gpu_util" | sed -n 11p | tr -s ' ' | cut -d ' ' -f 4)
-gpu_mem=$(echo "$gpu_util" | sed -n 12p | tr -s ' ' | cut -d ' ' -f 4)
+gpu=$(nvidia-smi -q -d UTILIZATION)
+gpu_util=$(echo "$gpu" | sed -n 11p | tr -s ' ' | cut -d ' ' -f 4)
+gpu_mem=$(echo "$gpu" | sed -n 12p | tr -s ' ' | cut -d ' ' -f 4)
+
+# Make values to be 2 digits
+printf -v cpu_util "%02d" "$cpu_util"
+printf -v cpu_mem "%02d" "$cpu_mem"
+printf -v gpu_util "%02d" "$gpu_util"
+printf -v gpu_mem "%02d" "$gpu_mem"
 
 # Echo the resulting string
-echo "CPU util/mem: "$cpu_util"%/"$mem_util"% | GPU util/mem: "$gpu"%/"$gpu_mem"%"
+echo "CPU util/mem: "$cpu_util"%/"$cpu_mem"% | GPU util/mem: "$gpu_util"%/"$gpu_mem"%"
 # EOF
