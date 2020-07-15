@@ -20,11 +20,7 @@ next to the time and date information.
     1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
     2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
     3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-<<<<<<< HEAD
     4. [Backtick command for checking RAM and GPU](#backtick-command-for-checking-ram-and-gpu)
-=======
-    4. [Backtick command for checking jobs at SLURM](#backtick-command-for-checking-jobs-at-slurm)
->>>>>>> 12ba261de597a92183e14f9c436df290a5994f82
     5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
     6. [Small fixes for appearance](#fixes-of-appearance)
     7. [Declaration of color handling](#declaration-of-color-handling)
