@@ -10,8 +10,8 @@
 ######################################################################
 
 # Get used and total RAM
-mem_tot=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 2)
-mem_avail=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 7)
+mem_tot=$(free -k | sed -n 2p | tr -s ' ' | cut -d ' ' -f 2)
+mem_avail=$(free -k | sed -n 2p | tr -s ' ' | cut -d ' ' -f 4)
 
 # Remove the G from the memory indications
 mem_tot=${mem_tot:0:$((${#mem_tot}-1))}
@@ -35,6 +35,12 @@ printf -v cpu_util "%02d" "$cpu_util"
 printf -v cpu_mem "%02d" "$cpu_mem"
 printf -v gpu_util "%02d" "$gpu_util"
 printf -v gpu_mem "%02d" "$gpu_mem"
+
+printf -v cpu_util "%3s" "$cpu_util"
+printf -v cpu_mem "%3s" "$cpu_mem"
+printf -v gpu_util "%3s" "$gpu_util"
+printf -v gpu_mem "%3s" "$gpu_mem"
+
 
 # Echo the resulting string
 echo "CPU util/mem: "$cpu_util"%/"$cpu_mem"% | GPU util/mem: "$gpu_util"%/"$gpu_mem"%"
