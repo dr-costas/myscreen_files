@@ -4,7 +4,7 @@
 # jobs submitted to SLURM. To be used with screen backtick
 # command.
 #
-len_thr=45
+len_thr=49
 
 # Get my current username
 me=$(whoami)
