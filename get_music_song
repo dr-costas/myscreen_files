@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-len_thr=43
+len_thr=45
 current_song=$(osascript ~/.myscreen_files/currently_playing.scpt)
 
 if [ -z ${current_song:0:1} ]
