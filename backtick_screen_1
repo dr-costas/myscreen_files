@@ -13,5 +13,5 @@ then
 else
 	t=`echo "$squeue_str" | wc -l`
 fi
-printf '%-40.40s' "Jobs running/total: $c/$t"
+printf '%-43.43s' "Jobs running/total: $c/$t"
 # EOF
