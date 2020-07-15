@@ -6,7 +6,7 @@ This is a git repository to hold the settings files for GNU screen. It contains 
 
   1. One that is generic (`main`)
   2. One that is specific to macOS (`macos`)
-  3. One that is specific to Linux-based computers, where the user has access like a personal computer (`linix-local`)
+  3. One that is specific to Linux-based computers, where the user has access like a personal computer (`linux-local`)
   4. And one that is specific to Linux clusters, using SLURM manager (`slurm`)
 
 The difference of four three branches is that they contain a different `screenrc` file. Additionally,
