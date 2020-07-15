@@ -4,7 +4,7 @@
 # jobs submitted to SLURM. To be used with screen backtick
 # command.
 #
-len_thr=43
+len_thr=45
 me=$(whoami)
 squeue_str=`squeue -u $me | grep $me`
 c=`echo "$squeue_str" | grep "\b[R]\b" | wc -l`
