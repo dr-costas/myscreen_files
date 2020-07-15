@@ -13,7 +13,6 @@
 mem_tot=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 2)
 mem_avail=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 7)
 
-
 # Remove the G from the memory indications
 mem_tot=${mem_tot:0:$((${#mem_tot}-1))}
 mem_avail=${mem_avail:0:$((${#mem_avail}-1))}
@@ -21,6 +20,7 @@ mem_avail=${mem_avail:0:$((${#mem_avail}-1))}
 # Get mem util percentage
 mem_util=$(echo "100 - ((100/$mem_tot) * $mem_avail)" | bc )
 
+# Get CPU utilization percentage
 cpu_util=$(mpstat | sed -n 4p | tr -s ' ' | cut -d ' ' -f 13)
 cpu_util=$(echo $cpu_util | awk '{print ($0-int($0)<0.499)?int($0):int($0)+1}')
 cpu_util=$(echo "100 - $cpu_util" | bc )
@@ -31,6 +31,5 @@ gpu=$(echo "$gpu_util" | sed -n 11p | tr -s ' ' | cut -d ' ' -f 4)
 gpu_mem=$(echo "$gpu_util" | sed -n 12p | tr -s ' ' | cut -d ' ' -f 4)
 
 # Echo the resulting string
-# echo "Mem. use/tot: "$mem_avail"/"$mem_tot" | GPU util/mem: "$gpu"%/"$gpu_mem"%"
 echo "CPU util/mem: "$cpu_util"%/"$mem_util"% | GPU util/mem: "$gpu"%/"$gpu_mem"%"
 # EOF
