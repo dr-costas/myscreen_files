@@ -3,14 +3,14 @@
 ## Intro
 
 This is a branch of the git repository with the settings files for GNU screen, focused
-on the use case of having GNU Screen when connected to a computational cluster, using SLURM.
-The difference from the main branch, is that here there is one extra file:
+on the use case of having GNU Screen in a Linux machine, e.g. personal computer, with
+GPU. The difference from the main branch, is that here there is one extra file:
 
-1. File `backtick_screen_1`, that is used for getting the SLURM jobs that are currently
-runing and the toral jobs that are submitted to SLURM, for the user.
+1. File `backtick_screen_1`, that is used for getting the used and available RAM memory,
+and the GPU utilization and GPU utilized memory. 
 
-The amount of runing and total submitted jobs to SLURM, is printed at the right hand
-side of the hardstatus line.
+The above mentioned information is printed to the right hand side of the hardstatus line,
+next to the time and date information. 
 
 ## Table of contents
 
@@ -20,7 +20,7 @@ side of the hardstatus line.
     1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
     2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
     3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-    4. [Backtick command for checking jobs at SLURM](backtick-command-for-checking-jobs-at-slurm)
+    4. [Backtick command for checking RAM and GPU](#backtick-command-for-checking-ram-and-gpu)
     5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
     6. [Small fixes for appearance](#fixes-of-appearance)
     7. [Declaration of color handling](#declaration-of-color-handling)
@@ -41,7 +41,7 @@ To use the files in this branch of the repository, clone the current branch to y
 doing
 
 ```bash
-$ git --single-branch --branch slurm clone git@github.com:dr-costas/myscreen_files.git
+$ git --single-branch --branch linux-local clone git@github.com:dr-costas/myscreen_files.git
 ```
 
 Then, change the name of the created directory, so you will not see it (as it happens by default with
@@ -65,7 +65,7 @@ The `screenrc` of this branch consists of the following sections:
   1. [Deactivation of the start-up message](#deactivation-of-the-start-up-message)
   2. [Definition of Vim-like navigation between windows](#vim-like-navigation)
   3. [Similar, Vim-like, resizing of windows](#vim-like-resizing-of-windows)
-  4. [Backtick command for checking jobs at SLURM](#backtick-command-for-checking-jobs-at-slurm)
+  4. [Backtick command for checking RAM and GPU](#backtick-command-for-checking-ram-and-gpu)
   5. [Setting-up of hardstatus](#setting-up-of-hardstatus)
   6. [Small fixes for appearance](#fixes-of-appearance)
   7. [Declaration of color handling](#declaration-of-color-handling)
@@ -160,15 +160,17 @@ bind J resize -v -10  # Decrease vertically by 10
 ```
 You change the step size (i.e. the `10`) at will.
 
-### Backtick command for checking jobs at slurm
+### Backtick command for checking RAM and GPU
 
-One of the typical cases of using GNU Screen, is to connect to a server. When this server
-is a computational cluster, then most probably the server will use SLURM system, to manage
-allocation of resources.
+Apart from having GNU Screen to connect to servers, you can use it to connect to your
+office Linux machine, or even work on your machine through GNU Screen. There are
+different information that one can use while working on the terminal, but this repository
+is focusing on the RAM and GPU resources. 
 
 In this branch, there is a backtick command to use with GNU Screen, which offers a monitoring
-of the status of user's jobs at the cluster. The format is `running jobs/total submitted jobs`
-and is at the line
+of the RAM and GPU usage. The information is presented in the form `used/total` for the RAM,
+and in the form of `GPU utilization in percentage/GPU memory utilization in percentage` for
+GPU. The command is declared at the line
 
 ```bash
 backtick 1 1 1 <path-to-home>/.myscreen_files/backtick_screen_1

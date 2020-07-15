@@ -17,7 +17,7 @@ bind K resize -v +10 # Ctl-a K increase vertically by 10
 bind J resize -v -10 # Ctl-a J decrease vertically by 10
 
 # Backtick tricks
-backtick 1 1 1 <path-to-home>/.myscreen_files/backtick_screen_1
+backtick 1 1 1 /home/drossos/.myscreen_files/backtick_screen_1
 
 # Setup hardstatus 
 hardstatus off

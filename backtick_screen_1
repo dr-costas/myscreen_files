@@ -1,17 +1,23 @@
-#!/usr/bin/bash
-# 
-# Small file for getting the amount of active and total
-# jobs submitted to SLURM. To be used with screen backtick
-# command.
+#!/usr/bin/env bash
+
+######################################################################
+# @author      : drossos
+# @file        : .backtick_local_linux
+# @created     : Wednesday Jul 15, 2020 14:38:07 EEST
 #
-me=$(whoami)
-squeue_str=`squeue -u $me | grep $me`
-c=`echo "$squeue_str" | grep "\b[R]\b" | wc -l`
-if [ -z "$squeue_str" ]
-then
-	t=0
-else
-	t=`echo "$squeue_str" | wc -l`
-fi
-printf '%-40.40s' "Jobs running/total: $c/$t"
+# @description : Script to querying available resources, used with 
+# 			     `backtick` command of GNU Screen.
+######################################################################
+
+# Get used and total RAM
+mem_tot=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 2)
+mem_avail=$(free -h | sed -n 2p | tr -s ' ' | cut -d ' ' -f 7)
+
+# Get GPU utilization
+gpu_util=$(nvidia-smi -q -d UTILIZATION)
+gpu=$(echo "$gpu_util" | sed -n 11p | tr -s ' ' | cut -d ' ' -f 4)
+gpu_mem=$(echo "$gpu_util" | sed -n 12p | tr -s ' ' | cut -d ' ' -f 4)
+
+# Echo the resulting string
+echo "Mem. use/tot: "$mem_avail"/"$mem_tot" | GPU util/mem: "$gpu"%/"$gpu_mem"%"
 # EOF
