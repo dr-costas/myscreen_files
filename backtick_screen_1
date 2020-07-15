@@ -5,14 +5,24 @@
 # command.
 #
 len_thr=45
+
+# Get my current username
 me=$(whoami)
+
+# Get my jobs from SLURM squeue
 squeue_str=`squeue -u $me | grep $me`
+
+# And get the running ones
 c=`echo "$squeue_str" | grep "\b[R]\b" | wc -l`
+
+# Check if there are any runing ones
 if [ -z "$squeue_str" ]
 then
 	t=0
 else
 	t=`echo "$squeue_str" | wc -l`
 fi
+
+# Echo the result
 printf "%-$len_thr.$len_thr""s" "Jobs running/total: $c/$t"
 # EOF
