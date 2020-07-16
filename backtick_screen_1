@@ -9,18 +9,21 @@
 # 			     `backtick` command of GNU Screen.
 ######################################################################
 
-# Get memory usage string
-mem_info=$(free -k | sed -n 2p | tr -s ' ')
+# Get top info 
+top_info=$(top -bn 1)
+
+# Get memory info
+mem_info=$(echo "$top_info" | sed -n 4p | tr -s ' ')
 
 # Get used and total memory
-mem_tot=$(echo $mem_info | cut -d ' ' -f 2)
-mem_avail=$(echo $mem_info | cut -d ' ' -f 3)
+mem_used=$(echo "$mem_info" | cut -d ' ' -f 8)
+mem_tot=$(echo "$mem_info" | cut -d ' ' -f 4)
 
-# Get mem util percentage
-cpu_mem=$(echo "(100/$mem_tot) * $mem_avail" | bc -l  | awk '{print ($0-int($0)<0.499)?int($0):int($0)+1}')
+# Calc percentage
+cpu_mem=$(echo "(100/$mem_tot) * $mem_used" | bc -l | awk '{print ($0-int($0)<0.499)?int($0):int($0)+1}')
 
 # Get CPU utilization
-cpu_util=$(mpstat | sed -n 4p | tr -s ' ' | cut -d ' ' -f 13)
+cpu_util=$(echo "$top_info" | sed -n 3p | tr -s ' ' | cut -d ' ' -f 8)
 cpu_util=$(echo $cpu_util | awk '{print ($0-int($0)<0.499)?int($0):int($0)+1}')
 cpu_util=$(echo "100 - $cpu_util" | bc )
 
