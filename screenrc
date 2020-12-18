@@ -1,6 +1,8 @@
 # File: ~/.screenrc
 # 
 
+shell -$SHELL
+
 # Deactivate the startup message of screen
 startup_message off
 
@@ -17,7 +19,7 @@ bind K resize -v +10  # Ctl-a K increase vertically by 10
 bind J resize -v -10  # Ctl-a J decrease vertically by 10
 
 # Backtick
-backtick 1 0 7 /Users/<your_user_name>/.myscreen_files/get_music_song
+backtick 1 0 7 /Users/konstantinosdrosos/.myscreen_files/get_music_song
 
 # Setup hardstatus 
 hardstatus off
