@@ -1,6 +1,8 @@
 # File: ~/.screenrc
 # 
 
+shell -$SHELL
+
 # Deactivate the startup message of screen
 startup_message off
 
