@@ -43,7 +43,7 @@ def main():
         to_return = f'{to_return}{tmp_m}: '
 
         if len(song_str) == 1:
-            song_info = 'No stream info available.'
+            song_info = 'No info available.'
             artist = ''
             track = ''
         else:
