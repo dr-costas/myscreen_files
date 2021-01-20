@@ -3,7 +3,7 @@
 len_thr=49
 current_song=$(osascript ~/.myscreen_files/currently_playing.scpt)
 
-if [ -z ${current_song:0:1} ]
+if [ -z ${current_song:1:1} ]
 then
     current_song=${current_song:1:$((${#current_song}-1))}
 fi
@@ -19,6 +19,6 @@ else
 	fi
 fi
 
-printf -v to_return "%-$len_thr.$len_thr""s" "$to_return"
+printf -v to_return "%-$len_thr.$len_thr""s" "$python_output"
 echo "$to_return"
 # EOF
