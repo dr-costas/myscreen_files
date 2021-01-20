@@ -19,12 +19,12 @@ bind K resize -v +10  # Ctl-a K increase vertically by 10
 bind J resize -v -10  # Ctl-a J decrease vertically by 10
 
 # Backtick
-backtick 1 0 7 /Users/konstantinosdrosos/.myscreen_files/get_music_song
+backtick 1 0 7 /Users/konstantinosdrosos/.myscreen_files/process_strings.py
 
 # Setup hardstatus 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string '%{= .g} %H |%=%{K}%{= w}%?%{K}%-Lw%?%{r}(%{W}%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%= %{g}|%{B} %1` %{g}|%{B} %m-%d  %{W}%c %{g} '
+hardstatus string "%{= .g} %H |%=%{= w}%?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%{g}|%{B} %1` %{g}|%{B} %m-%d %{W} %{w}%c %{g} "
 
 # Fix for residual editor text
 altscreen on
