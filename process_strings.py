@@ -24,12 +24,12 @@ def main():
         stderr=subprocess.PIPE,
         universal_newlines=True,
         check=True
-    ).stdout
+    ).stdout.strip()
 
     to_return = ''
 
-    if in_arg == '':
-        to_return = 'Nothing is playing'
+    if in_arg == '' or in_arg.startswith('missing'):
+        to_return = 'Nothing is playing.'
     else:
         to_return = 'Now playing'
         arg_str = in_arg.split(' || ')
@@ -75,9 +75,9 @@ def main():
             str_index = 0
 
         _song_index_path.write_text(f'{str_index}\n{artist}\n{track}')
-        to_return = f'{to_return}{song_info}'.strip().ljust(_len_thr)
+        to_return = f'{to_return}{song_info}'.strip()
 
-        print(to_return, end='', flush=True)
+    print(to_return.ljust(_len_thr), end='', flush=True)
 
 
 if __name__ == '__main__':
