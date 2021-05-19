@@ -1,3 +1,5 @@
 # Ignore the songindex file
 songindex
+
+# Ignore Vim swap files
 *.swp
