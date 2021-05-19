@@ -1,2 +1,3 @@
 # Ignore the songindex file
 songindex
+*.swp
