@@ -52,7 +52,7 @@ def main():
             # Then the argument at 1 index is the station
             tmp_m = f' ({arg_str[1]})'
 
-            # The rest are the sondg and artist
+            # The rest are the song and artist
             song_str = arg_str[-1].split(' - ')
         else:
             # No radio station here
