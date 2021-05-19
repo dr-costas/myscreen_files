@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# from sys import argv
 import subprocess
 from pathlib import Path
 
