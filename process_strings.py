@@ -1,19 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import subprocess
 from pathlib import Path
+from os import environ
+from collections import deque
+from itertools import (
+    cycle,
+    islice,
+)
+
+from dotenv import (
+    find_dotenv as dotenv_find_dotenv,
+    load_dotenv as dotenv_load_dotenv,
+    set_key as dotenv_set_key,
+)
 
 __author__ = 'Konstantinos Drossos'
 __docformat__ = 'reStructuredText'
 __all__ = ['main']
 
 
-# The file name of the file to keep the previously playing song
-_song_index_path = Path.home().joinpath('.myscreen_files', 'songindex')
-
 # The apple script file name
-_osa_scrpt_file = Path.home().joinpath('.myscreen_files', 'currently_playing.scpt')
+_osa_output_path = Path.home().joinpath('.curr_playing')
 
 # The maximum length of the info string
 _len_thr = 49
@@ -21,28 +29,59 @@ _len_thr = 49
 # Character step for moving the info string
 _str_step = 3
 
+# Space after the string while rolling
+_str_space = 6
+
+# OS env variables
+_env_var_indx = 'PRV_SONG_INDX'
+_env_var_artist = 'PRV_SONG_ARTIST'
+_env_var_track = 'PRV_SONG_TRACK'
+
+_special_chars = [
+    "Ohat", "Odots", "Oforwardaccent", "Obackaccent", "Oce", "Oline", "Odash", "Otilde",
+    "ohat", "odots", "oforwardaccent", "obackaccent", "oce", "oline", "odash", "otilde",
+    "Aforwardaccent", "Abackaccent", "Ahat", "Adots", "Ae", "Atilde", "Ao", "Adash",
+    "aforwardaccent", "abackaccent", "ahat", "adots", "ae", "atilde", "ao", "adash",
+    "Eforwardaccent", "Ebackaccent", "Ehat", "Edots", "Edash", "Edot", "Eturk",
+    "eforwardaccent", "ebackaccent", "ehat", "edots", "edash", "edot", "eturk",
+    "Uhat", "Udots", "Uforwardaccent", "Ubackaccent", "Udash",
+    "uhat", "udots", "uforwardaccent", "ubackaccent", "udash"
+]
+
+_substitue_chars = [
+    "Ô", "Ö", "Ò", "Ó", "Œ", "Ø", "Ō", "Õ",
+    "ô", "ö", "ò", "ó", "œ", "ø", "ō", "õ",
+    "À", "Á", "Â", "Ä", "Æ", "Ã", "Å", "Ā",
+    "à", "á", "â", "ä", "æ", "ã", "å", "ā",
+    "È", "É", "Ê", "Ë", "Ē", "Ė", "Ę",
+    "è", "é", "ê", "ë", "ē", "ė", "ę",
+    "Û", "Ü", "Ù", "Ú", "Ū",
+    "û", "ü", "ù", "ú", "ū",
+]
+
+
+def replace_special_chars(the_string: str) -> str:
+    for special_char, sub_char in zip(_special_chars, _substitue_chars):
+        the_string = the_string.replace(special_char, sub_char)
+    return the_string
+
 
 def main():
     # Get the output of the Applescript for the currently playing song
-    in_arg = subprocess.run(
-            ['osascript', str(_osa_scrpt_file)],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True,
-        check=True
-    ).stdout.strip()
+    in_arg = _osa_output_path.read_text().strip()
 
     # Initialize the string output so the linter will not complain
-    to_return = ''
+    to_return = "ﱘ "
+
+    # Dotenv file
+    dot_env_file = dotenv_find_dotenv()
 
     # Check if we have some output from the script
     if in_arg == '' or in_arg.startswith('missing'):
         # If not, then nothing is playing
-        to_return = 'Nothing is playing.'
+        to_return = f'{to_return}: Nothing is playing.'
     else:
-        # Else, now is playing something, add the indication to the
-        # string to be returned
-        to_return = 'Now playing'
+        # Else, now is playing something
 
         # Split the return string from the Apple script
         arg_str = in_arg.split(' || ')
@@ -54,6 +93,7 @@ def main():
 
             # The rest are the song and artist
             song_str = arg_str[-1].split(' - ')
+            song_str = [song_str[-1]] + song_str[:-1]
         else:
             # No radio station here
             tmp_m = ''
@@ -62,7 +102,7 @@ def main():
             song_str = arg_str
 
         # Add the info for radio in the string to be returned
-        to_return = f'{to_return}{tmp_m}: '
+        to_return = f'{to_return}:{tmp_m} '
 
         # Check if we have some info for the song
         if len(song_str) == 1:
@@ -79,52 +119,36 @@ def main():
             track = song_str[1].strip()
 
         # Construct the song info string
-        song_info = f'{song_info}{" " * (2 * _str_step)}'
-
-        # And calculate the length of the info string
-        # without the `Now playing: ` part
         len_thr = _len_thr - len(to_return)
+        len_diff = len(song_info) - len_thr
 
-        # If the string is longer than the indicated length
-        if len(song_info) > len_thr:
+        if len_diff > 0:
+            song_info = f'{song_info}{" " * _str_space}'
+            s_cycle = cycle(song_info)
 
-            # Check our previous situation
-            try: 
-                saved_text = _song_index_path.read_text().split('\n')
-            except FileNotFoundError:
-                # If there is no previous file, then assign initial values
-                saved_text = '0\n\n'
+            dotenv_load_dotenv(dot_env_file)
+            str_index = int(environ.get(_env_var_indx, 0))
+            prv_artist = environ.get(_env_var_artist, '')
+            prv_track = environ.get(_env_var_track, '')
 
-            # Parse the previous situation
-            str_index = int(saved_text[0])
-            prv_artist = saved_text[1].strip()
-            prv_track = saved_text[2].strip()
-
-            # Check if we are still in the same artist and song
             if prv_artist != artist or prv_track != track:
                 # If we are not, initialize the string index to be used next
                 str_index = 0
 
-            # Trim the song info string
-            song_info = song_info[str_index:]
+            deque(islice(s_cycle, str_index), maxlen=0)
 
-            # Check if the remaining string is longer than the limit
-            if len(song_info) > len_thr:
-                # If it is, trim 
-                song_info = song_info[:len_thr]
-                # and update the string index to be used next
-                str_index += _str_step
-            else:
-                # Else, initialize the string index
-                str_index = 0
+            song_info = ''.join([str(next(s_cycle)) for _ in range(len_thr)])
+
+            str_index += _str_step
         else:
-            # Again, initialize the string index
+            song_info = f'{song_info}{" " * abs(len_diff)}'
             str_index = 0
 
-        # Write the current situation to the file that we use
-        _song_index_path.write_text(f'{str_index}\n{artist}\n{track}')
-
-        # Assign to the variable the info for what is playing now
+        dotenv_set_key(dot_env_file, _env_var_indx, str(str_index))
+        dotenv_set_key(dot_env_file, _env_var_artist, artist)
+        dotenv_set_key(dot_env_file, _env_var_track, track)
+        if any([i in song_info for i in _special_chars]):
+            song_info = replace_special_chars(song_info)
         to_return = f'{to_return}{song_info}'.strip()
 
     # Printout the info
