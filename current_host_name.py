@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """Simple script to identify if the computer is under a VPN.
 To be used with the `.screenrc` file, in order to display
-the VON result in the GNU Screen's status bar.
+the VPN result in the GNU Screen's status bar.
 """
 
 __authors__ = ["Konstantinos Drosos"]
