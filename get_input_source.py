@@ -7,6 +7,7 @@ Detailed description.
 
 __docformat__ = 'reStructuredText'
 
+from pathlib import Path
 import subprocess
 
 
@@ -15,7 +16,7 @@ def get_input_source() -> str:
         [
             "defaults",
             "read",
-            "/Users/kostas/Library/Preferences/com.apple.HIToolbox.plist",
+            f"{Path.home()}/Library/Preferences/com.apple.HIToolbox.plist",
         ],
         stdout=subprocess.PIPE,
     ).stdout.decode(
@@ -34,6 +35,8 @@ def get_input_source() -> str:
     )[0].strip()
 
     to_print = " "
+
+    print(x)
 
     if x == "ABC":
         to_print = f"{to_print} US"
