@@ -1,6 +1,5 @@
 # File: ~/.screenrc
 # 
-
 shell "/bin/bash"
 
 # Deactivate the startup message of screen
@@ -19,13 +18,13 @@ bind K resize -v +10  # Ctl-a K increase vertically by 10
 bind J resize -v -10  # Ctl-a J decrease vertically by 10
 
 # Backtick
-backtick 1 1 1 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/process_strings.py
-backtick 2 30 30 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/current_host_name.py
-backtick 3 30 30 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/get_battery.py
-backtick 4 1000 1000 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/get_calendar_icon.py
-backtick 5 1000 1000 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/get_terminal_icon.py
-backtick 6 1 1 /Users/kostas/.pyenv/versions/3.7.11/bin/python /Users/kostas/.myscreen_files/get_input_source.py
-backtick 7 1000 1000 /Users/kostas/.myscreen_files/get_weather.sh
+backtick 1 1 1 python $HOME/.myscreen_files/process_strings.py
+backtick 2 30 30 python $HOME/.myscreen_files/current_host_name.py
+backtick 3 30 30 python $HOME/.myscreen_files/get_battery.py
+backtick 4 1000 1000 python $HOME/.myscreen_files/get_calendar_icon.py
+backtick 5 1000 1000 python $HOME/.myscreen_files/get_terminal_icon.py
+backtick 6 1 1 python $HOME/.myscreen_files/get_input_source.py
+backtick 7 1000 1000 $HOME/.myscreen_files/get_weather.sh
 
 # Setup hardstatus 
 hardstatus off
