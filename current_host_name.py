@@ -11,7 +11,6 @@ __docformat__ = "reStructuredText"
 
 from os import uname
 
-
 def main():
     h_name = uname().nodename
 
