@@ -9,4 +9,6 @@
 ######################################################################
 
 
-curl wttr.in/?format="%c+%t"
+weather=`curl wttr.in/?format="%c+%t"`
+weather=${weather// /}
+echo $weather
