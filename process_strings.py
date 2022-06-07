@@ -44,7 +44,9 @@ _special_chars = [
     'Eforwardaccent', 'Ebackaccent', 'Ehat', 'Edots', 'Edash', 'Edot', 'Eturk',
     'eforwardaccent', 'ebackaccent', 'ehat', 'edots', 'edash', 'edot', 'eturk',
     'Uhat', 'Udots', 'Uforwardaccent', 'Ubackaccent', 'Udash',
-    'uhat', 'udots', 'uforwardaccent', 'ubackaccent', 'udash'
+    'uhat', 'udots', 'uforwardaccent', 'ubackaccent', 'udash',
+    'Ihat', 'Idots', 'Ibackaccent', 'Ibar', 'Iturk', 'Iforwardaccent',
+    'ihat', 'idots', 'ibackaccent', 'ibar', 'iturk', 'iforwardaccent',
 ]
 
 _substitue_chars = [
@@ -56,6 +58,8 @@ _substitue_chars = [
     'è', 'é', 'ê', 'ë', 'ē', 'ė', 'ę',
     'Û', 'Ü', 'Ù', 'Ú', 'Ū',
     'û', 'ü', 'ù', 'ú', 'ū',
+    'Î', 'Ï', 'Í', 'Ī', 'Į', 'Ì',
+    'i', 'ï', 'í', 'ī', 'į', 'ì'
 ]
 
 
