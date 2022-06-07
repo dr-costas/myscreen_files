@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Summary of the module.
-
-Detailed description.
-"""
+"""Module prints a calendar icon. """
 
 __docformat__ = 'reStructuredText'
 
