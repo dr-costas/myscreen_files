@@ -23,7 +23,7 @@ __all__ = ['main']
 _osa_output_path = Path.home().joinpath('.curr_playing')
 
 # The maximum length of the info string
-_len_thr = 49
+_len_thr = 40
 
 # Character step for moving the info string
 _str_step = 3
@@ -37,25 +37,25 @@ _env_var_artist = 'PRV_SONG_ARTIST'
 _env_var_track = 'PRV_SONG_TRACK'
 
 _special_chars = [
-    "Ohat", "Odots", "Oforwardaccent", "Obackaccent", "Oce", "Oline", "Odash", "Otilde",
-    "ohat", "odots", "oforwardaccent", "obackaccent", "oce", "oline", "odash", "otilde",
-    "Aforwardaccent", "Abackaccent", "Ahat", "Adots", "Ae", "Atilde", "Ao", "Adash",
-    "aforwardaccent", "abackaccent", "ahat", "adots", "ae", "atilde", "ao", "adash",
-    "Eforwardaccent", "Ebackaccent", "Ehat", "Edots", "Edash", "Edot", "Eturk",
-    "eforwardaccent", "ebackaccent", "ehat", "edots", "edash", "edot", "eturk",
-    "Uhat", "Udots", "Uforwardaccent", "Ubackaccent", "Udash",
-    "uhat", "udots", "uforwardaccent", "ubackaccent", "udash"
+    'Ohat', 'Odots', 'Oforwardaccent', 'Obackaccent', 'Oce', 'Oline', 'Odash', 'Otilde',
+    'ohat', 'odots', 'oforwardaccent', 'obackaccent', 'oce', 'oline', 'odash', 'otilde',
+    'Aforwardaccent', 'Abackaccent', 'Ahat', 'Adots', 'Ae', 'Atilde', 'Ao', 'Adash',
+    'aforwardaccent', 'abackaccent', 'ahat', 'adots', 'ae', 'atilde', 'ao', 'adash',
+    'Eforwardaccent', 'Ebackaccent', 'Ehat', 'Edots', 'Edash', 'Edot', 'Eturk',
+    'eforwardaccent', 'ebackaccent', 'ehat', 'edots', 'edash', 'edot', 'eturk',
+    'Uhat', 'Udots', 'Uforwardaccent', 'Ubackaccent', 'Udash',
+    'uhat', 'udots', 'uforwardaccent', 'ubackaccent', 'udash'
 ]
 
 _substitue_chars = [
-    "Ô", "Ö", "Ò", "Ó", "Œ", "Ø", "Ō", "Õ",
-    "ô", "ö", "ò", "ó", "œ", "ø", "ō", "õ",
-    "À", "Á", "Â", "Ä", "Æ", "Ã", "Å", "Ā",
-    "à", "á", "â", "ä", "æ", "ã", "å", "ā",
-    "È", "É", "Ê", "Ë", "Ē", "Ė", "Ę",
-    "è", "é", "ê", "ë", "ē", "ė", "ę",
-    "Û", "Ü", "Ù", "Ú", "Ū",
-    "û", "ü", "ù", "ú", "ū",
+    'Ô', 'Ö', 'Ò', 'Ó', 'Œ', 'Ø', 'Ō', 'Õ',
+    'ô', 'ö', 'ò', 'ó', 'œ', 'ø', 'ō', 'õ',
+    'À', 'Á', 'Â', 'Ä', 'Æ', 'Ã', 'Å', 'Ā',
+    'à', 'á', 'â', 'ä', 'æ', 'ã', 'å', 'ā',
+    'È', 'É', 'Ê', 'Ë', 'Ē', 'Ė', 'Ę',
+    'è', 'é', 'ê', 'ë', 'ē', 'ė', 'ę',
+    'Û', 'Ü', 'Ù', 'Ú', 'Ū',
+    'û', 'ü', 'ù', 'ú', 'ū',
 ]
 
 
@@ -70,7 +70,7 @@ def main():
     in_arg = _osa_output_path.read_text().strip()
 
     # Initialize the string output so the linter will not complain
-    to_return = "ﱘ "
+    to_return = 'ﱘ '.strip()
 
     # Dotenv file
     dot_env_file = dotenv_find_dotenv()
@@ -78,7 +78,7 @@ def main():
     # Check if we have some output from the script
     if in_arg == '' or in_arg.startswith('missing'):
         # If not, then nothing is playing
-        to_return = f'{to_return}: Nothing is playing.'
+        to_return = f'{to_return} : Nothing is playing.'
     else:
         # Else, now is playing something
 

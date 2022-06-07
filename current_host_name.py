@@ -20,7 +20,7 @@ def main():
     else:
         vpn_name = h_name.split(".")[0]
 
-    print(f"  {vpn_name}")
+    print(f" {vpn_name}")
 
 
 if __name__ == "__main__":

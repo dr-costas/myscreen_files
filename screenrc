@@ -29,7 +29,7 @@ backtick 7 1000 1000 python $HOME/.myscreen_files/get_weather.py
 # Setup hardstatus 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string "%{= .r} %2` - %3`- %6` %{g}| %{= w}%-25<%=%5` %?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%-104<%{g} | %{b}%1` %{g}| %{w}%4` %D %M %d %c:%s %Y   %7` "
+hardstatus string "%{= .r} %2` - %3`- %6` %{g}| %{= w}%-25<%=%5` %?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%-93<%{g} | %{b}%1`%{g}| %{w}%4`%D %M %d %c:%s %Y - %7`"
 # hardstatus string "%{= .r} %2` - %3` %{g}| %{= w}%=%5` %?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%{g} | %{b}%1` %{g}| %{w}%4` %D %M %d %c:%s %Y"
 # hardstatus string "%{= .g} %H |%=%{= w}%?%{K}%-Lw%?%{r}(%{w}%n%{w}*%f%t%?(%u)%?%{r})%{w}%?%{K}%+Lw%?%=%{g}|%{B} %1` %{g}|%{B} %m-%d %{W} %{w}%c %{g} "
 

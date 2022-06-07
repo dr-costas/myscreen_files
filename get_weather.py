@@ -14,7 +14,7 @@ def main():
         stdout=PIPE
     ).stdout.rstrip().decode('utf-8').split()
 
-    if len(weather) == []:
+    if len(weather) == 0:
         print('No weather info', flush=True, end='')
     else:
         print(f'{weather[0]}  {weather[1]}', flush=True, end='')

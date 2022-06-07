@@ -14,40 +14,40 @@ import subprocess
 def get_input_source() -> str:
     x = subprocess.run(
         [
-            "defaults",
-            "read",
-            f"{Path.home()}/Library/Preferences/com.apple.HIToolbox.plist",
+            'defaults',
+            'read',
+            f'{Path.home()}/Library/Preferences/com.apple.HIToolbox.plist',
         ],
         stdout=subprocess.PIPE,
     ).stdout.decode(
-        encoding="utf-8",
-        errors="strict",
+        encoding='utf-8',
+        errors='strict',
     ).split(
-        "AppleSelectedInputSources"
+        'AppleSelectedInputSources'
     )[-1].split(
-        "KeyboardLayout Name"
+        'KeyboardLayout Name'
     )[-1].split(
-        "\n"
+        '\n'
     )[0].split(
-        "="
+        '='
     )[-1].split(
-        ";"
+        ';'
     )[0].strip()
 
-    to_print = " "
+    to_print = '  '
 
     print(x)
 
-    if x == "ABC":
-        to_print = f"{to_print} US"
-    elif x == "Greek":
-        to_print = f"{to_print} GR"
+    if x == 'ABC':
+        to_print = f'{to_print}US'
+    elif x == 'Greek':
+        to_print = f'{to_print}GR'
 
     return to_print
 
 
 def main():
-    print(get_input_source(), flush=True, end="")
+    print(get_input_source(), flush=True, end='')
 
 
 if __name__ == '__main__':

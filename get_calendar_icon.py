@@ -11,8 +11,8 @@ __docformat__ = 'reStructuredText'
 
 
 def main():
-    x = " ".strip()
-    print(f"{x} ", flush=True, end="")
+    x = ' '.strip()
+    print(f'{x} ', flush=True, end='')
 
 
 if __name__ == '__main__':
