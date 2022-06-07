@@ -5,7 +5,7 @@
 __docformat__ = 'reStructuredText'
 
 
-def main():
+def main() -> None:
     x = ' '.strip()
     print(f'{x} ', flush=True, end='')
 
