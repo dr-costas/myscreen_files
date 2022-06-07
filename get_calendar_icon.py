@@ -7,8 +7,6 @@ Detailed description.
 
 __docformat__ = 'reStructuredText'
 
-# imports
-
 
 def main():
     x = ' '.strip()
