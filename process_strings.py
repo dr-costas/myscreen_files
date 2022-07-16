@@ -66,89 +66,93 @@ def replace_special_chars(the_string: str) -> str:
 
 
 def main():
-    # Get the output of the Applescript for the currently playing song
-    in_arg = _osa_output_path.read_text().strip()
-
     # Initialize the string output so the linter will not complain
     to_return = "ﱘ "
 
-    # Dotenv file
-    dot_env_file = dotenv_find_dotenv()
+    try:
+        # Get the output of the Applescript for the currently playing song
+        in_arg = _osa_output_path.read_text().strip()
 
-    # Check if we have some output from the script
-    if in_arg == '' or in_arg.startswith('missing'):
-        # If not, then nothing is playing
-        to_return = f'{to_return}: Nothing is playing.'
-    else:
-        # Else, now is playing something
+        # Dotenv file
+        dot_env_file = dotenv_find_dotenv()
 
-        # Split the return string from the Apple script
-        arg_str = in_arg.split(' || ')
-
-        # Check the case where there is radio playing in Music app
-        if arg_str[0].startswith('radio'):
-            # Then the argument at 1 index is the station
-            tmp_m = f' ({arg_str[1]})'
-
-            # The rest are the song and artist
-            song_str = arg_str[-1].split(' - ')
-            song_str = [song_str[-1]] + song_str[:-1]
+        # Check if we have some output from the script
+        if in_arg == '' or in_arg.startswith('missing'):
+            # If not, then nothing is playing
+            to_return = f'{to_return}: Nothing is playing.'
         else:
-            # No radio station here
-            tmp_m = ''
+            # Else, now is playing something
 
-            # All arguments are song and artist
-            song_str = arg_str
+            # Split the return string from the Apple script
+            arg_str = in_arg.split(' || ')
 
-        # Add the info for radio in the string to be returned
-        to_return = f'{to_return}:{tmp_m} '
+            # Check the case where there is radio playing in Music app
+            if arg_str[0].startswith('radio'):
+                # Then the argument at 1 index is the station
+                tmp_m = f' ({arg_str[1]})'
 
-        # Check if we have some info for the song
-        if len(song_str) == 1:
-             # If we don't then using the no info avail string
-            song_info = 'No info available.'
+                # The rest are the song and artist
+                song_str = arg_str[-1].split(' - ')
+                song_str = [song_str[-1]] + song_str[:-1]
+            else:
+                # No radio station here
+                tmp_m = ''
 
-            # And use empty strings for artist and track
-            artist = ''
-            track = ''
-        else:
-            # Else, use the available info
-            song_info = f'{" - ".join(song_str)}'
-            artist = song_str[0].strip()
-            track = song_str[1].strip()
+                # All arguments are song and artist
+                song_str = arg_str
 
-        # Construct the song info string
-        len_thr = _len_thr - len(to_return)
-        len_diff = len(song_info) - len_thr
+            # Add the info for radio in the string to be returned
+            to_return = f'{to_return}:{tmp_m} '
 
-        if len_diff > 0:
-            song_info = f'{song_info}{" " * _str_space}'
-            s_cycle = cycle(song_info)
+            # Check if we have some info for the song
+            if len(song_str) == 1:
+                 # If we don't then using the no info avail string
+                song_info = 'No info available.'
 
-            dotenv_load_dotenv(dot_env_file)
-            str_index = int(environ.get(_env_var_indx, 0))
-            prv_artist = environ.get(_env_var_artist, '')
-            prv_track = environ.get(_env_var_track, '')
+                # And use empty strings for artist and track
+                artist = ''
+                track = ''
+            else:
+                # Else, use the available info
+                song_info = f'{" - ".join(song_str)}'
+                artist = song_str[0].strip()
+                track = song_str[1].strip()
 
-            if prv_artist != artist or prv_track != track:
-                # If we are not, initialize the string index to be used next
+            # Construct the song info string
+            len_thr = _len_thr - len(to_return)
+            len_diff = len(song_info) - len_thr
+
+            if len_diff > 0:
+                song_info = f'{song_info}{" " * _str_space}'
+                s_cycle = cycle(song_info)
+
+                dotenv_load_dotenv(dot_env_file)
+                str_index = int(environ.get(_env_var_indx, 0))
+                prv_artist = environ.get(_env_var_artist, '')
+                prv_track = environ.get(_env_var_track, '')
+
+                if prv_artist != artist or prv_track != track:
+                    # If we are not, initialize the string index to be used next
+                    str_index = 0
+
+                deque(islice(s_cycle, str_index), maxlen=0)
+
+                song_info = ''.join([str(next(s_cycle)) for _ in range(len_thr)])
+
+                str_index += _str_step
+            else:
+                song_info = f'{song_info}{" " * abs(len_diff)}'
                 str_index = 0
 
-            deque(islice(s_cycle, str_index), maxlen=0)
+            dotenv_set_key(dot_env_file, _env_var_indx, str(str_index))
+            dotenv_set_key(dot_env_file, _env_var_artist, artist)
+            dotenv_set_key(dot_env_file, _env_var_track, track)
+            if any([i in song_info for i in _special_chars]):
+                song_info = replace_special_chars(song_info)
+            to_return = f'{to_return}{song_info}'.strip()
 
-            song_info = ''.join([str(next(s_cycle)) for _ in range(len_thr)])
-
-            str_index += _str_step
-        else:
-            song_info = f'{song_info}{" " * abs(len_diff)}'
-            str_index = 0
-
-        dotenv_set_key(dot_env_file, _env_var_indx, str(str_index))
-        dotenv_set_key(dot_env_file, _env_var_artist, artist)
-        dotenv_set_key(dot_env_file, _env_var_track, track)
-        if any([i in song_info for i in _special_chars]):
-            song_info = replace_special_chars(song_info)
-        to_return = f'{to_return}{song_info}'.strip()
+    except FileNotFoundError:
+        to_return = f"{to_return}: Currently playing is not set-up"
 
     # Printout the info
     print(to_return.ljust(_len_thr), end='', flush=True)
