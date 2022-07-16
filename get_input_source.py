@@ -36,9 +36,7 @@ def get_input_source() -> str:
 
     to_print = " "
 
-    print(x)
-
-    if x == "ABC":
+    if x == "ABC" or x == "\"U.S.\"":
         to_print = f"{to_print} US"
     elif x == "Greek":
         to_print = f"{to_print} GR"
