@@ -151,11 +151,13 @@ def main():
                 song_info = replace_special_chars(song_info)
             to_return = f'{to_return}{song_info}'.strip()
 
+        # Printout the info
+        print(to_return.ljust(_len_thr), end="", flush=True)
+
     except FileNotFoundError:
         to_return = f"{to_return}: Currently playing is not set-up"
 
-    # Printout the info
-    print(to_return.ljust(_len_thr), end='', flush=True)
+        print(to_return, end="", flush=True)
 
 
 if __name__ == '__main__':
