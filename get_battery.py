@@ -25,7 +25,7 @@ def get_battery_status_string() -> str:
 
     x = x.split("\n")
 
-    if x[0] == "Now drawing from 'AC Power'":
+    if x[0] == "Now drawing from 'AC Power'" and "InternalBattery" not in x[1]:
         return "  "
     else:
         x = x[1].split(";")
