@@ -83,7 +83,7 @@ def main():
         # Check if we have some output from the script
         if in_arg == '' or in_arg.startswith('missing'):
             # If not, then nothing is playing
-            to_return = f'{to_return}: Nothing is playing.'
+            to_return = f'{to_return} : Nothing is playing.'
         else:
             # Else, now is playing something
 
@@ -106,7 +106,7 @@ def main():
                 song_str = arg_str
 
             # Add the info for radio in the string to be returned
-            to_return = f'{to_return}:{tmp_m} '
+            to_return = f'{to_return} :{tmp_m} '
 
             # Check if we have some info for the song
             if len(song_str) == 1:
