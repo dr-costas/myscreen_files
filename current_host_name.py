@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Simple script to identify if the computer is under a VPN.
+"""Simple script to get the SSID.
 To be used with the `.screenrc` file, in order to display
 the VPN result in the GNU Screen's status bar.
 """
@@ -8,19 +8,37 @@ the VPN result in the GNU Screen's status bar.
 __authors__ = ['Konstantinos Drosos']
 __docformat__ = 'reStructuredText'
 
-from os import uname
+from subprocess import run, PIPE
 
 def main():
-    h_name = uname().nodename
 
-    if h_name.endswith('eu-west-1.compute.internal'):
-        vpn_name = 'Wolt VPN'
-    elif h_name.endswith('.local') or h_name.endswith('.lan'):
-        vpn_name = 'local'
+    x = (
+        run(
+            [
+                "/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport",
+                "-I",
+            ],
+            stdout=PIPE,
+        )
+        .stdout.decode(
+            encoding="utf-8",
+            errors="strict",
+        )
+    )
+
+    if "AirPort: Off" in x:
+        x = x.replace(": Off", " is off").strip()
     else:
-        vpn_name = h_name.split('.')[0]
+        x = (x
+            .split(" SSID: ")[-1]
+            .split("\n")[0]
+            .strip()
+        )
 
-    print(f' {vpn_name}')
+        if "" == x:
+            x = "Not connected"
+
+    print(f' {x}')
 
 
 if __name__ == '__main__':
