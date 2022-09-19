@@ -159,7 +159,7 @@ def main():
         print(to_return.ljust(_len_thr), end="", flush=True)
 
     except FileNotFoundError:
-        to_return = f"{to_return}: Currently playing is not set-up"
+        to_return = f"{to_return} : Currently playing is not set-up"
 
         print(to_return, end="", flush=True)
 
